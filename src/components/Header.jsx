@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom';
+import '../styles/Header.css';
 
 const Header = ({ isAuth }) => {
   return (
-    <header className="bg-white shadow-md p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-gray-800">
+    <header className="header">
+      <div className="header-container">
+        <Link to="/" className="header-title">
           Projeto QA Pet
         </Link>
-        <nav>
+        <nav className="header-nav">
           {isAuth ? (
-            <Link to="/dashboard" className="text-gray-600 hover:text-gray-800">Dashboard</Link>
+            <Link to="/dashboard" className="header-link">Dashboard</Link>
           ) : (
-            <div className="space-x-4">
-              <Link to="/login" className="text-gray-600 hover:text-gray-800">Login</Link>
-              <Link to="/register" className="text-gray-600 hover:text-gray-800">Registrar</Link>
+            <div className="header-auth-links">
+              <Link to="/login" className="header-link">Login</Link>
+              <Link to="/register" className="header-link">Registrar</Link>
             </div>
           )}
         </nav>

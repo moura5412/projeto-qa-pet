@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import '../styles/Pages.css';
+
 const NotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center p-4">
-      <h1 className="text-5xl font-bold text-gray-800 mb-4">404</h1>
-      <p className="text-2xl text-gray-600 mb-8">Página não encontrada.</p>
-      <Link to="/" className="text-blue-500 hover:underline">
+    <div className="not-found-container">
+      <h1 className="not-found-title">404</h1>
+      <p className="not-found-text">Página não encontrada.</p>
+      <Link to="/" className="not-found-link">
         Voltar para a página inicial
       </Link>
     </div>

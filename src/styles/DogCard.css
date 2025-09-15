@@ -1,0 +1,55 @@
+/* DogCard */
+.dog-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3b82f6;
+}
+
+.dog-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dog-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.dog-card-text {
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+}
+
+.dog-card-tasks {
+  margin-top: 1rem;
+}
+
+.dog-card-tasks-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dog-card-button {
+  width: 100%;
+  background-color: #22c55e;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.dog-card-button:hover {
+  background-color: #16a34a;
+}
+
+.dog-actions-group {
+  display: flex;
+  gap: 0.5rem;
+}

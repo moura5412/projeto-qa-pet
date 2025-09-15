@@ -1,14 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const DogForm = ({ breeds, onAddDog }) => {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [selectedBreed, setSelectedBreed] = useState('');
+import '../styles/DogForm.css';
+
+const DogForm = ({ breeds, onAddDog, onEditDog, initialData }) => {
+  const [name, setName] = useState(initialData?.name || '');
+  const [age, setAge] = useState(initialData?.age || '');
+  const [selectedBreed, setSelectedBreed] = useState(initialData?.breed || '');
+
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name);
+      setAge(initialData.age);
+      setSelectedBreed(initialData.breed);
+    }
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && age && selectedBreed) {
-      onAddDog({ name, age, breed: selectedBreed });
+      if (initialData) {
+        onEditDog({ ...initialData, name, age, breed: selectedBreed });
+      } else {
+        onAddDog({ name, age, breed: selectedBreed });
+      }
       setName('');
       setAge('');
       setSelectedBreed('');
@@ -16,33 +30,34 @@ const DogForm = ({ breeds, onAddDog }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-100 p-4 rounded-lg shadow-inner">
-      <div className="mb-4">
-        <label className="block text-gray-700">Nome do Cachorro</label>
+    <form onSubmit={handleSubmit} className="dog-form">
+      <h3>{initialData ? 'Editar Cachorro' : 'Cadastrar Cachorro'}</h3>
+      <div className="dog-form-group">
+        <label className="dog-form-label">Nome do Cachorro</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-3 py-2 border rounded-lg"
+          className="dog-form-input"
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Idade</label>
+      <div className="dog-form-group">
+        <label className="dog-form-label">Idade</label>
         <input
           type="number"
           value={age}
           onChange={(e) => setAge(e.target.value)}
-          className="w-full px-3 py-2 border rounded-lg"
+          className="dog-form-input"
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Raça</label>
+      <div className="dog-form-group">
+        <label className="dog-form-label">Raça</label>
         <select
           value={selectedBreed}
           onChange={(e) => setSelectedBreed(e.target.value)}
-          className="w-full px-3 py-2 border rounded-lg"
+          className="dog-form-select"
           required
         >
           <option value="">Selecione uma raça</option>
@@ -53,9 +68,9 @@ const DogForm = ({ breeds, onAddDog }) => {
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+        className="dog-form-button"
       >
-        Cadastrar
+        {initialData ? 'Salvar Edição' : 'Cadastrar'}
       </button>
     </form>
   );

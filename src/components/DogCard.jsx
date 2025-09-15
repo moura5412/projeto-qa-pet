@@ -2,39 +2,60 @@ import TaskForm from './TaskForm';
 import TaskList from './TaskList';
 import { useState } from 'react';
 
-const DogCard = ({ dog, onAddTask, onToggleTaskStatus, onDeleteTask }) => {
+import '../styles/DogCard.css';
+
+const DogCard = ({ dog, onAddTask, onToggleTaskStatus, onDeleteTask, onEditDog, onEditTask, onDeleteDog }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
 
   const handleTaskSubmit = (newTask) => {
     onAddTask(dog.id, newTask);
     setShowTaskForm(false);
   };
 
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
-      <h3 className="text-xl font-bold mb-2">{dog.name}</h3>
-      <p className="text-gray-600">Idade: {dog.age} anos</p>
-      <p className="text-gray-600">Raça: {dog.breed}</p>
+  const handleEditTask = (updatedTask) => {
+    onEditTask(dog.id, updatedTask);
+    setEditingTask(null);
+  };
 
-      <div className="mt-4">
-        <h4 className="font-semibold">Tarefas do Dia:</h4>
+  return (
+    <div className="dog-card">
+      <div className="dog-card-header">
+        <h3 className="dog-card-title">{dog.name}</h3>
+        <div className="dog-actions-group">
+          <button className="edit-button" onClick={() => onEditDog(dog)}>Editar</button>
+          <button className="delete-button" onClick={() => onDeleteDog(dog.id)}>Excluir</button>
+        </div>
+      </div>
+      <p className="dog-card-text">Idade: {dog.age} anos</p>
+      <p className="dog-card-text">Raça: {dog.breed}</p>
+
+      <div className="dog-card-tasks">
+        <h4 className="dog-card-tasks-title">Tarefas do Dia:</h4>
         <TaskList
           tasks={dog.tasks}
           onToggleTaskStatus={onToggleTaskStatus}
           onDeleteTask={onDeleteTask}
+          onEditClick={(task) => setEditingTask(task)}
           dogId={dog.id}
         />
       </div>
 
       <button
-        onClick={() => setShowTaskForm(!showTaskForm)}
-        className="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
+        onClick={() => {
+          setShowTaskForm(!showTaskForm);
+          setEditingTask(null);
+        }}
+        className="dog-card-button"
       >
         {showTaskForm ? 'Cancelar' : 'Adicionar Nova Tarefa'}
       </button>
 
       {showTaskForm && (
         <TaskForm onSubmit={handleTaskSubmit} />
+      )}
+      {editingTask && (
+        <TaskForm onSubmit={handleEditTask} initialData={editingTask} />
       )}
     </div>
   );

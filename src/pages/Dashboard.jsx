@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
 import DogForm from '../components/DogForm';
 import DogCard from '../components/DogCard';
+import { getBreeds } from '../services/api';
 
-// Simulação de API e estado
-const api = {
-  getBreeds: async () => [{ attributes: { name: 'Golden Retriever' } }, { attributes: { name: 'Labrador' } }],
-};
+import '../styles/Dashboard.css';
 
 const Dashboard = () => {
   const [dogs, setDogs] = useState([]);
   const [breeds, setBreeds] = useState([]);
-  const [selectedDog, setSelectedDog] = useState(null);
+  const [editingDog, setEditingDog] = useState(null);
 
   useEffect(() => {
     const fetchBreeds = async () => {
-      const data = await api.getBreeds();
+      const data = await getBreeds();
       setBreeds(data.map(item => item.attributes.name));
     };
     fetchBreeds();
@@ -24,11 +22,34 @@ const Dashboard = () => {
     setDogs([...dogs, { ...newDog, id: Date.now(), tasks: [] }]);
   };
 
+  const handleEditDog = (updatedDog) => {
+    setDogs(dogs.map(dog => dog.id === updatedDog.id ? updatedDog : dog));
+    setEditingDog(null); // Sai do modo de edição
+  };
+
+  const handleDeleteDog = (dogId) => {
+    if (window.confirm('Tem certeza que deseja excluir este cachorro?')) {
+      setDogs(dogs.filter(dog => dog.id !== dogId));
+    }
+  };
+
   const handleAddTask = (dogId, newTask) => {
     setDogs(dogs.map(dog =>
       dog.id === dogId ? { ...dog, tasks: [...dog.tasks, { ...newTask, id: Date.now(), status: 'incompleta' }] } : dog
     ));
-    setSelectedDog(null);
+  };
+
+  const handleEditTask = (dogId, updatedTask) => {
+    setDogs(dogs.map(dog =>
+      dog.id === dogId
+        ? {
+            ...dog,
+            tasks: dog.tasks.map(task =>
+              task.id === updatedTask.id ? updatedTask : task
+            ),
+          }
+        : dog
+    ));
   };
 
   const handleToggleTaskStatus = (dogId, taskId) => {
@@ -51,27 +72,30 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">Dashboard do Pet</h1>
+    <div className="dashboard-container">
+      <h1 className="dashboard-title">Dashboard do Pet</h1>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Cadastrar Cachorro</h2>
-        <DogForm breeds={breeds} onAddDog={handleAddDog} />
+      <section className="dashboard-section">
+        <h2 className="dashboard-section-title">
+          {editingDog ? 'Editar Cachorro' : 'Cadastrar Cachorro'}
+        </h2>
+        <DogForm breeds={breeds} onAddDog={handleAddDog} onEditDog={handleEditDog} initialData={editingDog} />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Meus Cachorros</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="dashboard-section">
+        <h2 className="dashboard-section-title">Meus Cachorros</h2>
+        <div className="dog-list-grid">
           {dogs.length > 0 ? (
             dogs.map(dog => (
               <DogCard
                 key={dog.id}
                 dog={dog}
-                onSelect={() => setSelectedDog(dog)}
+                onEditDog={setEditingDog}
+                onDeleteDog={handleDeleteDog}
                 onAddTask={handleAddTask}
+                onEditTask={handleEditTask}
                 onToggleTaskStatus={handleToggleTaskStatus}
                 onDeleteTask={handleDeleteTask}
-                isSelected={selectedDog?.id === dog.id}
               />
             ))
           ) : (

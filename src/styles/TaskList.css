@@ -1,0 +1,88 @@
+/* TaskList */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.task-item-complete {
+  background-color: #d1fae5;
+}
+
+.task-item-incomplete {
+  background-color: #fee2e2;
+}
+
+.task-name {
+  font-weight: 600;
+}
+
+.task-name-complete {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.task-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.task-datetime {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-button-toggle, .task-button-delete, .task-button-edit {
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.task-button-toggle {
+  background-color: #3b82f6;
+}
+
+.task-button-toggle:hover {
+  background-color: #2563eb;
+}
+
+.task-button-delete {
+  background-color: #ef4444;
+}
+
+.task-button-delete:hover {
+  background-color: #dc2626;
+}
+
+.task-button-edit {
+  background-color: #6366f1;
+}
+
+.task-button-edit:hover {
+  background-color: #4f46e5;
+}
+
+.no-tasks {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
