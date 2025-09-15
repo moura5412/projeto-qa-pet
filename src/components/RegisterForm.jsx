@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { users } from '../services/userData';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -8,10 +9,20 @@ const RegisterForm = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (username && password) {
-      alert('Usuário registrado com sucesso! Por favor, faça o login.');
-      navigate('/login');
+
+    // Verificação de usuário duplicado
+    const userExists = users.find(user => user.username === username);
+
+    if (userExists) {
+      alert('Este nome de usuário já existe. Por favor, escolha outro.');
+      return; // Interrompe a função e não prossegue com o registro
     }
+
+    // Adiciona o novo usuário à lista
+    users.push({ username, password });
+
+    alert('Usuário registrado com sucesso! Por favor, faça o login.');
+    navigate('/login');
   };
 
   return (
