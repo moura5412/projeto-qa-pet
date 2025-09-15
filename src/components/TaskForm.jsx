@@ -8,9 +8,6 @@ const TaskForm = ({ onSubmit, initialData }) => {
   const [date, setDate] = useState(initialData?.date || '');
   const [time, setTime] = useState(initialData?.time || '');
 
-  // Use useEffect para atualizar o estado quando `initialData` mudar.
-  // Isso é crucial para que o formulário "reaja" quando o usuário clica em editar
-  // e o `editingTask` no DogCard é atualizado.
   useEffect(() => {
     if (initialData) {
       setName(initialData.name);
@@ -18,7 +15,6 @@ const TaskForm = ({ onSubmit, initialData }) => {
       setDate(initialData.date);
       setTime(initialData.time);
     } else {
-      // Limpar o formulário se não houver dados iniciais
       setName('');
       setDescription('');
       setDate('');
@@ -29,19 +25,16 @@ const TaskForm = ({ onSubmit, initialData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (initialData) {
-      // Se estamos editando, envie a tarefa com o ID original
       onSubmit({
-        ...initialData, // Garanta que o ID e o status original sejam mantidos
+        ...initialData,
         name,
         description,
         date,
         time
       });
     } else {
-      // Se estamos adicionando uma nova tarefa
       onSubmit({ name, description, date, time });
     }
-    // Limpar os campos do formulário após o envio
     setName('');
     setDescription('');
     setDate('');
@@ -49,11 +42,12 @@ const TaskForm = ({ onSubmit, initialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
-      <h3>{initialData ? 'Editar Tarefa' : 'Adicionar Nova Tarefa'}</h3>
-      <div className="task-form-group">
-        <label className="task-form-label">Nome da Tarefa</label>
+    <form onSubmit={handleSubmit} className="task-form" data-cy="task-form">
+      <h3 data-cy="task-form-title">{initialData ? 'Editar Tarefa' : 'Adicionar Nova Tarefa'}</h3>
+      <div className="task-form-group" data-cy="task-form-group-name">
+        <label className="task-form-label" data-cy="task-form-label-name">Nome da Tarefa</label>
         <input
+          data-cy="task-form-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -61,27 +55,30 @@ const TaskForm = ({ onSubmit, initialData }) => {
           required
         />
       </div>
-      <div className="task-form-group">
-        <label className="task-form-label">Descrição (opcional)</label>
+      <div className="task-form-group" data-cy="task-form-group-description">
+        <label className="task-form-label" data-cy="task-form-label-description">Descrição (opcional)</label>
         <textarea
+          data-cy="task-form-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="task-form-textarea"
         ></textarea>
       </div>
-      <div className="task-form-group-inline">
-        <div className="task-form-group">
-          <label className="task-form-label">Data (opcional)</label>
+      <div className="task-form-group-inline" data-cy="task-form-group-inline">
+        <div className="task-form-group" data-cy="task-form-group-date">
+          <label className="task-form-label" data-cy="task-form-label-date">Data (opcional)</label>
           <input
+            data-cy="task-form-date"
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
             className="task-form-input"
           />
         </div>
-        <div className="task-form-group">
-          <label className="task-form-label">Horário (opcional)</label>
+        <div className="task-form-group" data-cy="task-form-group-hour">
+          <label className="task-form-label" data-cy="task-form-label-hour">Horário (opcional)</label>
           <input
+            data-cy="task-form-hour"
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
@@ -90,6 +87,7 @@ const TaskForm = ({ onSubmit, initialData }) => {
         </div>
       </div>
       <button
+        data-cy="btn-save-task"
         type="submit"
         className="task-form-button"
       >

@@ -38,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header isAuth={isAuth} />
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto p-4" data-cy="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

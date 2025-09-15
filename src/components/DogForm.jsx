@@ -30,11 +30,12 @@ const DogForm = ({ breeds, onAddDog, onEditDog, initialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="dog-form">
-      <h3>{initialData ? 'Editar Cachorro' : 'Cadastrar Cachorro'}</h3>
-      <div className="dog-form-group">
-        <label className="dog-form-label">Nome do Cachorro</label>
+    <form onSubmit={handleSubmit} className="dog-form" data-cy="dog-form">
+      <h3 data-cy="dog-form-title">{initialData ? 'Editar Cachorro' : 'Cadastrar Cachorro'}</h3>
+      <div className="dog-form-group" data-cy="dog-form-group-name">
+        <label className="dog-form-label" data-cy="dog-form-label-name">Nome do Cachorro</label>
         <input
+          data-cy="dog-form-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -42,9 +43,10 @@ const DogForm = ({ breeds, onAddDog, onEditDog, initialData }) => {
           required
         />
       </div>
-      <div className="dog-form-group">
-        <label className="dog-form-label">Idade</label>
+      <div className="dog-form-group" data-cy="dog-form-group-age">
+        <label className="dog-form-label" data-cy="dog-form-label-age">Idade</label>
         <input
+          data-cy="dog-form-age"
           type="number"
           value={age}
           onChange={(e) => setAge(e.target.value)}
@@ -52,9 +54,10 @@ const DogForm = ({ breeds, onAddDog, onEditDog, initialData }) => {
           required
         />
       </div>
-      <div className="dog-form-group">
-        <label className="dog-form-label">Raça</label>
+      <div className="dog-form-group" data-cy="dog-form-group-breed">
+        <label className="dog-form-label" data-cy="dog-form-label-breed">Raça</label>
         <select
+          data-cy="dog-form-breed"
           value={selectedBreed}
           onChange={(e) => setSelectedBreed(e.target.value)}
           className="dog-form-select"
@@ -67,6 +70,7 @@ const DogForm = ({ breeds, onAddDog, onEditDog, initialData }) => {
         </select>
       </div>
       <button
+        data-cy="btn-save-dog"
         type="submit"
         className="dog-form-button"
       >

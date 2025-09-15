@@ -26,13 +26,14 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <h1 className="form-title">Registrar</h1>
-        <form onSubmit={handleRegister}>
-          <div className="form-group">
-            <label className="form-label">Novo Usuário</label>
+    <div className="form-container" data-cy="register-form-container">
+      <div className="form-wrapper" data-cy="register-form-wrapper">
+        <h1 className="form-title" data-cy="register-form-title">Registrar</h1>
+        <form onSubmit={handleRegister} data-cy="register-form">
+          <div className="form-group" data-cy="register-form-group-username">
+            <label className="form-label" data-cy="register-form-label-username">Novo Usuário</label>
             <input
+              data-cy="register-email"
               type="text"
               className="form-input"
               value={username}
@@ -40,9 +41,10 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label className="form-label">Nova Senha</label>
+          <div className="form-group" data-cy="register-form-group-password">
+            <label className="form-label" data-cy="register-form-label-password">Nova Senha</label>
             <input
+              data-cy="register-password"
               type="password"
               className="form-input"
               value={password}
@@ -51,14 +53,15 @@ const RegisterForm = () => {
             />
           </div>
           <button
+            data-cy="btn-register"
             type="submit"
             className="form-button"
           >
             Criar Conta
           </button>
         </form>
-        <p className="form-link-text">
-          Já tem uma conta? <Link to="/login" className="form-link">Faça login</Link>
+        <p className="form-link-text" data-cy="register-form-link-text">
+          Já tem uma conta? <Link to="/login" data-cy="link-back-login" className="form-link">Faça login</Link>
         </p>
       </div>
     </div>

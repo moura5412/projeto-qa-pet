@@ -72,19 +72,24 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-title">Dashboard do Pet</h1>
+    <div className="dashboard-container" data-cy="dashboard-container">
+      <h1 className="dashboard-title" data-cy="dashboard-title">Dashboard do Pet</h1>
 
-      <section className="dashboard-section">
-        <h2 className="dashboard-section-title">
+      <section className="dashboard-section" data-cy="dashboard-section-form">
+        <h2 className="dashboard-section-title" data-cy="dashboard-section-title-form">
           {editingDog ? 'Editar Cachorro' : 'Cadastrar Cachorro'}
         </h2>
-        <DogForm breeds={breeds} onAddDog={handleAddDog} onEditDog={handleEditDog} initialData={editingDog} />
+        <DogForm
+          breeds={breeds}
+          onAddDog={handleAddDog}
+          onEditDog={handleEditDog}
+          initialData={editingDog}
+        />
       </section>
 
-      <section className="dashboard-section">
-        <h2 className="dashboard-section-title">Meus Cachorros</h2>
-        <div className="dog-list-grid">
+      <section className="dashboard-section" data-cy="dashboard-section-list">
+        <h2 className="dashboard-section-title" data-cy="dashboard-section-title-list">Meus Cachorros</h2>
+        <div className="dog-list-grid" data-cy="dog-list-grid">
           {dogs.length > 0 ? (
             dogs.map(dog => (
               <DogCard
@@ -99,7 +104,7 @@ const Dashboard = () => {
               />
             ))
           ) : (
-            <p>Você ainda não cadastrou nenhum cachorro.</p>
+            <p data-cy="no-dogs-message">Você ainda não cadastrou nenhum cachorro.</p>
           )}
         </div>
       </section>

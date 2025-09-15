@@ -1,7 +1,11 @@
 import RegisterForm from '../components/RegisterForm';
 
-const Login = () => {
-  return <RegisterForm />;
+const Register = () => {
+  return (
+    <div data-cy="register-page">
+      <RegisterForm />
+    </div>
+  );
 };
 
-export default Login;
+export default Register;

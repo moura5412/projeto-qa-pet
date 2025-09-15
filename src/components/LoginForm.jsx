@@ -27,13 +27,14 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <h1 className="form-title">Login</h1>
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label className="form-label">Usuário</label>
+    <div className="form-container" data-cy="login-form-container">
+      <div className="form-wrapper" data-cy="login-form-wrapper">
+        <h1 className="form-title" data-cy="login-form-title">Login</h1>
+        <form onSubmit={handleLogin} data-cy="login-form">
+          <div className="form-group" data-cy="login-form-group-username">
+            <label className="form-label" data-cy="login-form-label-username">Usuário</label>
             <input
+              data-cy="login-email"
               type="text"
               className="form-input"
               value={username}
@@ -41,9 +42,10 @@ const LoginForm = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label className="form-label">Senha</label>
+          <div className="form-group" data-cy="login-form-group-password">
+            <label className="form-label" data-cy="login-form-label-password">Senha</label>
             <input
+              data-cy="login-password"
               type="password"
               className="form-input"
               value={password}
@@ -52,14 +54,15 @@ const LoginForm = () => {
             />
           </div>
           <button
+            data-cy="btn-login"
             type="submit"
             className="form-button"
           >
             Entrar
           </button>
         </form>
-        <p className="form-link-text">
-          Não tem uma conta? <Link to="/register" className="form-link">Cadastre-se</Link>
+        <p className="form-link-text" data-cy="login-form-link-text">
+          Não tem uma conta? <Link to="/register" data-cy="link-register" className="form-link">Cadastre-se</Link>
         </p>
       </div>
     </div>

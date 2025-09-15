@@ -1,7 +1,11 @@
 import LoginForm from '../components/LoginForm';
 
 const Login = () => {
-  return <LoginForm />;
+  return (
+    <div data-cy="login-page">
+      <LoginForm />
+    </div>
+  );
 };
 
 export default Login;
