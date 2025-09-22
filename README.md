@@ -1,12 +1,62 @@
-# React + Vite
+# Projeto QA Pet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto web completo, criado com **React** e **Vite**, focado em gerenciar animais de estimação. Ele permite que usuários se registrem, façam login e gerenciem seus pets e as tarefas relacionadas a eles. O projeto também inclui testes de ponta a ponta com **Cypress**, garantindo a qualidade e o bom funcionamento das funcionalidades.
 
-Currently, two official plugins are available:
+## Funcionalidades Principais
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Registro de Usuário**: Crie uma nova conta para começar a usar o sistema.
+- **Login**: Acesse sua conta com suas credenciais.
+- **Dashboard**: Visualize um resumo dos seus pets e tarefas.
+- **Gestão de Animais**:
+  - Cadastre um novo animal de estimação.
+  - Edite as informações de um pet existente.
+  - Exclua um animal da sua lista.
+- **Gestão de Tarefas**:
+  - Crie tarefas específicas para cada animal (por exemplo, "dar banho", "comprar ração").
+  - Edite as tarefas para atualizar seu status ou detalhes.
+  - Exclua tarefas concluídas ou indesejadas.
 
-## Expanding the ESLint configuration
+## Como Executar o Projeto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Para colocar o projeto em funcionamento na sua máquina local, siga os passos abaixo.
+
+### Pré-requisitos
+
+Certifique-se de que você tem o **Node.js** e o **npm** (ou Yarn) instalados na sua máquina.
+
+### Instalação
+
+1.  Clone este repositório para o seu ambiente local:
+
+    ```bash
+    git clone [URL_DO_SEU_REPOSITORIO]
+    cd nome-do-repositorio
+    ```
+
+2.  Instale as dependências do projeto:
+
+    ```bash
+    npm install
+    ```
+
+### Executando a Aplicação
+
+Para iniciar o servidor de desenvolvimento e rodar a aplicação:
+
+```bash
+npm run dev
+```
+
+## Testes Automatizados com Cypress
+
+Para garantir a confiabilidade da aplicação, usamos o Cypress para testes de ponta a ponta.
+
+### Como Rodar os Testes
+
+Para abrir a interface gráfica do Cypress e rodar os testes de forma interativa:
+
+```bash
+npm run cypress
+```
+
+Para rodar os testes a partir da linha de comando (modo headless):
