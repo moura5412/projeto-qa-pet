@@ -29,8 +29,8 @@ Certifique-se de que você tem o **Node.js** e o **npm** (ou Yarn) instalados na
 1.  Clone este repositório para o seu ambiente local:
 
     ```bash
-    git clone [URL_DO_SEU_REPOSITORIO]
-    cd nome-do-repositorio
+    git clone https://github.com/moura5412/projeto-qa-pet.git
+    cd projeto-qa-pet
     ```
 
 2.  Instale as dependências do projeto:
