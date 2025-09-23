@@ -58,5 +58,3 @@ Para abrir a interface gráfica do Cypress e rodar os testes de forma interativa
 ```bash
 npm run cypress
 ```
-
-Para rodar os testes a partir da linha de comando (modo headless):
