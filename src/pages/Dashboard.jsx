@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const handleEditDog = (updatedDog) => {
     setDogs(dogs.map(dog => dog.id === updatedDog.id ? updatedDog : dog));
-    setEditingDog(null); // Sai do modo de edição
+    setEditingDog(null);
   };
 
   const handleDeleteDog = (dogId) => {

@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 
-// Simulação de hook de autenticação
 const useAuth = () => {
   const [user, setUser] = useState(null);
 
@@ -26,7 +25,6 @@ const useAuth = () => {
   return { user, login, logout, isAuth };
 };
 
-// Componente para rotas protegidas
 const ProtectedRoute = ({ children }) => {
   const { isAuth } = useAuth();
   return isAuth ? children : <Navigate to="/login" />;

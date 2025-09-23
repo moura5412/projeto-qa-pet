@@ -10,18 +10,14 @@ const LoginForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Procura na lista por um usuário que corresponda ao nome de usuário e à senha
     const userFound = users.find(
       (user) => user.username === username && user.password === password
     );
 
     if (userFound) {
-      // Se o usuário for encontrado (ou seja, a verificação passou),
-      // salva no localStorage e navega para o dashboard
       localStorage.setItem('user', JSON.stringify({ username }));
       navigate('/dashboard');
     } else {
-      // Caso contrário, exibe um alerta de erro e não faz o login
       alert('Usuário ou senha incorretos.');
     }
   };

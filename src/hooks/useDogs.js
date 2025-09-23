@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 const useDogs = () => {
   const [dogs, setDogs] = useState([]);
 
-  // Lógica para carregar cachorros do localStorage (simulação)
   useEffect(() => {
     const storedDogs = localStorage.getItem('dogs');
     if (storedDogs) {
@@ -11,7 +10,6 @@ const useDogs = () => {
     }
   }, []);
 
-  // Lógica para salvar cachorros no localStorage
   useEffect(() => {
     localStorage.setItem('dogs', JSON.stringify(dogs));
   }, [dogs]);

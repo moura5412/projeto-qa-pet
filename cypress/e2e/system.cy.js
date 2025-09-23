@@ -3,20 +3,17 @@ describe("Fluxo completo do sistema Pet", () => {
   const password = "123456";
 
   it("Deve realizar o fluxo completo: registro → login → CRUD animal/tarefa → logout", () => {
-    // Registro
     cy.visit("/register");
     cy.get('[data-cy="register-email"]').type(email);
     cy.get('[data-cy="register-password"]').type(password);
     cy.get('[data-cy="btn-register"]').click();
     cy.url().should("include", "/login");
 
-    // Login
     cy.get('[data-cy="login-email"]').type(email);
     cy.get('[data-cy="login-password"]').type(password);
     cy.get('[data-cy="btn-login"]').click();
     cy.get('[data-cy="dashboard-title"]').should("contain", "Dashboard do Pet");
 
-    // Criar animal
     cy.mockApi();
 
     cy.get('[data-cy="dog-form-name"]').type("Bobby");
@@ -25,7 +22,6 @@ describe("Fluxo completo do sistema Pet", () => {
     cy.get('[data-cy="btn-save-dog"]').click();
     cy.get('[data-cy="dog-list-grid"]').should("contain", "Bobby");
 
-    // Editar animal
     cy.get('[data-cy="dog-list-grid"]')
         .contains('Bobby')
         .parent()
@@ -38,7 +34,6 @@ describe("Fluxo completo do sistema Pet", () => {
 
     cy.get('[data-cy="dog-list-grid"]').should("contain", "Rex");
 
-    // Criar tarefa
     cy.get('[data-cy^="btn-toggle-task-form-"]').click();
     cy.get('[data-cy="task-form-name"]').type("Passear");
     cy.get('[data-cy="task-form-description"]').type("Levar rex ao parque");
@@ -47,7 +42,6 @@ describe("Fluxo completo do sistema Pet", () => {
     cy.get('[data-cy="btn-save-task"]').click();
     cy.get('[data-cy^="task-list-dog-"]').should("contain", "Passear");
 
-    // Editar tarefa
     cy.get('[data-cy^="task-list-dog-"]')
       .contains("Passear")
       .parent()
@@ -61,12 +55,10 @@ describe("Fluxo completo do sistema Pet", () => {
 
 
     cy.on("window:confirm", (str) => {
-      // Verifica o texto da confirmação
       expect(str).to.be.oneOf([
           "Tem certeza que quer excluir esta tarefa?",
           "Tem certeza que deseja excluir este cachorro?"
       ]);
-      // Retorna true para confirmar a ação, como se o usuário tivesse clicado em "OK"
       return true;
     });
 
@@ -79,7 +71,6 @@ describe("Fluxo completo do sistema Pet", () => {
       });
     cy.get('[data-cy^="task-list-dog-"]').should("not.contain", "Correr");
 
-    // Excluir animal
     cy.get('[data-cy="dog-list-grid"]')
         .contains('Rex')
         .parent()
@@ -88,7 +79,6 @@ describe("Fluxo completo do sistema Pet", () => {
         });
     cy.get('[data-cy="dog-list-grid"]').should("not.contain", "Rex");
 
-    // Logout
     cy.get('[data-cy="logout-link"]').should('exist').click();
     cy.wait(500);
     cy.url().should("include", "/login");

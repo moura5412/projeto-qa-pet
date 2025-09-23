@@ -7,9 +7,9 @@ export const getBreeds = async () => {
       throw new Error('Erro ao buscar as raças de cachorros');
     }
     const data = await response.json();
-    return data.data; // Retorna o array de raças
+    return data.data;
   } catch (error) {
     console.error("Falha na requisição da API de raças:", error);
-    return []; // Retorna um array vazio em caso de erro
+    return [];
   }
 };

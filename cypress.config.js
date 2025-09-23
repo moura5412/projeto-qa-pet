@@ -2,6 +2,6 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "http://localhost:5173", // ajuste a porta do seu projeto
+    baseUrl: "http://localhost:5173", 
   },
 });

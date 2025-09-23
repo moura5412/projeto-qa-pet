@@ -10,15 +10,13 @@ const RegisterForm = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Verificação de usuário duplicado
     const userExists = users.find(user => user.username === username);
 
     if (userExists) {
       alert('Este nome de usuário já existe. Por favor, escolha outro.');
-      return; // Interrompe a função e não prossegue com o registro
+      return; 
     }
 
-    // Adiciona o novo usuário à lista
     users.push({ username, password });
 
     alert('Usuário registrado com sucesso! Por favor, faça o login.');
